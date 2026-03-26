@@ -174,7 +174,7 @@ export default function Dashboard() {
 
   // Auto-trigger outcome resolution on page load for past flights
   const triggerOutcomes = useCallback(async () => {
-    await fetch('/api/cron/outcomes');
+    await fetch('/api/resolve');
   }, []);
 
   useEffect(() => {
