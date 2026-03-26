@@ -87,13 +87,15 @@ export async function runScan(targetDate?: Date): Promise<{ flightsScanned: numb
       INSERT INTO bets (
         date, flight_number, airline_code, origin, destination,
         origin_name, destination_name, departure_at, distance_km,
-        ticket_price, delay_probability, compensation_amount, expected_value
+        ticket_price, delay_probability, compensation_amount, expected_value,
+        status
       ) VALUES (
         ${dateStr}, ${bet.flightNumber}, ${bet.airlineCode},
         ${bet.origin}, ${bet.destination}, ${bet.originName},
         ${bet.destinationName}, ${bet.departureAt.toISOString()},
         ${bet.distanceKm}, ${bet.ticketPrice}, ${bet.delayProbability},
-        ${bet.compensationAmount}, ${bet.expectedValue}
+        ${bet.compensationAmount}, ${bet.expectedValue},
+        'placed'
       )
     `;
   }
