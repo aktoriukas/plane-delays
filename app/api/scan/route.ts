@@ -1,11 +1,14 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { initDB } from '@/lib/db';
 import { runScan } from '@/lib/scanner';
 
-export async function POST() {
+export async function POST(request: NextRequest) {
   try {
     await initDB();
-    const result = await runScan();
+    const { searchParams } = new URL(request.url);
+    const dateParam = searchParams.get('date');
+    const targetDate = dateParam ? new Date(dateParam) : undefined;
+    const result = await runScan(targetDate);
     return NextResponse.json({
       success: true,
       flightsScanned: result.flightsScanned,
