@@ -43,6 +43,13 @@ export async function getBetsForDate(date: string) {
   return result.rows;
 }
 
+export async function getUpcomingBetsForDate(date: string) {
+  const result = await sql`
+    SELECT * FROM bets WHERE date = ${date} AND departure_at > NOW() ORDER BY departure_at ASC
+  `;
+  return result.rows;
+}
+
 export async function getAllBets(limit = 200, offset = 0) {
   const result = await sql`
     SELECT * FROM bets ORDER BY date DESC, expected_value DESC LIMIT ${limit} OFFSET ${offset}

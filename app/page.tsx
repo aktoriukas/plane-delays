@@ -225,9 +225,9 @@ export default function Dashboard() {
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
         <div>
-          <h1 style={{ fontSize: '24px', fontWeight: 700 }}>Today&apos;s Bets</h1>
+          <h1 style={{ fontSize: '24px', fontWeight: 700 }}>Upcoming Bets</h1>
           <p style={{ color: '#555566', fontSize: '14px', marginTop: '4px' }}>
-            {today} · {bets.length} active · {wonBets.length} won · {lostBets.length} lost · {pendingBets.length} pending
+            {today} · {bets.length} upcoming · {pendingBets.length} pending
           </p>
         </div>
         <button
@@ -251,8 +251,11 @@ export default function Dashboard() {
       ) : bets.length === 0 ? (
         <div style={{ textAlign: 'center', padding: '64px', color: '#555566' }}>
           <div style={{ fontSize: '48px', marginBottom: '16px' }}>✈️</div>
-          <p style={{ fontSize: '18px', marginBottom: '8px' }}>No bets for today yet</p>
-          <p style={{ fontSize: '14px', marginBottom: '24px' }}>The daily cron runs at 06:00 UTC. Run a manual scan now.</p>
+          <p style={{ fontSize: '18px', marginBottom: '8px' }}>No upcoming bets today</p>
+          <p style={{ fontSize: '14px', marginBottom: '24px' }}>
+            All of today&apos;s flights have already departed, or no bets have been generated yet.<br />
+            Next scan at 06:00 UTC. You can also run a manual scan now.
+          </p>
           <button
             onClick={triggerScan}
             disabled={scanning}

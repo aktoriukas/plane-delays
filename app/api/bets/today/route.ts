@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
-import { getBetsForDate, initDB } from '@/lib/db';
+import { getUpcomingBetsForDate, initDB } from '@/lib/db';
 
 export async function GET() {
   try {
     await initDB();
     const today = new Date().toISOString().split('T')[0];
-    const bets = await getBetsForDate(today);
+    const bets = await getUpcomingBetsForDate(today);
     return NextResponse.json({ bets, date: today });
   } catch (error) {
     console.error('GET /api/bets/today error:', error);
